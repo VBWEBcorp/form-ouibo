@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Questionnaire VBWEB",
+  title: "Questionnaire Ouibo",
   description:
     "La base de votre projet web. Quelques questions pour qu'on construise un site qui vous ressemble.",
 };

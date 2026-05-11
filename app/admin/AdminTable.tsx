@@ -34,14 +34,12 @@ export type Submission = {
   inspirations: string;
   fonctionnalites: string;
   motsCles: string;
-  cloudflareEmail: string;
-  cloudflarePassword: string;
   formspreeEmail: string;
   formspreePassword: string;
   notes: string;
 };
 
-const LAST_SEEN_KEY = "vbweb-admin-last-seen";
+const LAST_SEEN_KEY = "ouibo-admin-last-seen";
 const POLL_INTERVAL_MS = 25_000;
 
 export function AdminTable({ submissions }: { submissions: Submission[] }) {
@@ -123,9 +121,9 @@ export function AdminTable({ submissions }: { submissions: Submission[] }) {
   useEffect(() => {
     if (!hydrated) return;
     document.title =
-      unreadCount > 0 ? `(${unreadCount}) Admin · VBWEB` : "Admin · VBWEB";
+      unreadCount > 0 ? `(${unreadCount}) Admin · Ouibo` : "Admin · Ouibo";
     return () => {
-      document.title = "Admin · VBWEB";
+      document.title = "Admin · Ouibo";
     };
   }, [unreadCount, hydrated]);
 
@@ -193,9 +191,9 @@ export function AdminTable({ submissions }: { submissions: Submission[] }) {
         <div className="px-5 sm:px-8 py-4 max-w-7xl w-full mx-auto flex items-center gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://i.ibb.co/5Wcyh7qd/VBWEB-LOGO-OFFICIEL.png"
-            alt="VBWEB"
-            className="h-7 w-auto"
+            src="https://i.ibb.co/Y408rXy2/Logo-OUIBO-removebg-preview.png"
+            alt="Ouibo"
+            className="h-8 w-auto"
           />
           <span
             className="hidden sm:inline text-xs uppercase tracking-[0.22em]"
@@ -242,7 +240,7 @@ export function AdminTable({ submissions }: { submissions: Submission[] }) {
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer transition"
               style={{
                 color: "var(--vb-accent-600)",
-                border: "1px solid rgba(78, 186, 236, 0.3)",
+                border: "1px solid rgba(255, 77, 157, 0.3)",
                 background: "var(--vb-accent-50)",
               }}
               title="Marquer tous les questionnaires comme lus"
@@ -403,8 +401,6 @@ function Row({
   const dateStr = formatDate(date);
   const dateRel = relativeDate(date);
   const hasAcces =
-    sub.cloudflareEmail.length > 0 ||
-    sub.cloudflarePassword.length > 0 ||
     sub.formspreeEmail.length > 0 ||
     sub.formspreePassword.length > 0;
 
@@ -414,14 +410,14 @@ function Row({
       className={`cursor-pointer transition ${isNew ? "vb-row-new" : ""}`}
       style={{
         borderBottom: "1px solid var(--vb-border)",
-        background: isNew ? "rgba(234, 246, 253, 0.55)" : undefined,
+        background: isNew ? "rgba(253, 233, 242, 0.55)" : undefined,
       }}
       onMouseEnter={(e) =>
         (e.currentTarget.style.background = "var(--vb-accent-50)")
       }
       onMouseLeave={(e) =>
         (e.currentTarget.style.background = isNew
-          ? "rgba(234, 246, 253, 0.55)"
+          ? "rgba(253, 233, 242, 0.55)"
           : "")
       }
     >
@@ -502,7 +498,7 @@ function Pill({ label, tone }: { label: string; tone: "accent" | "muted" }) {
         style={{
           background: "var(--vb-accent-50)",
           color: "var(--vb-accent-600)",
-          border: "1px solid rgba(78, 186, 236, 0.3)",
+          border: "1px solid rgba(255, 77, 157, 0.3)",
         }}
       >
         {label}
@@ -720,16 +716,8 @@ function Drawer({
           )}
 
           {/* Accès techniques */}
-          {(submission.cloudflareEmail ||
-            submission.cloudflarePassword ||
-            submission.formspreeEmail ||
-            submission.formspreePassword) && (
+          {(submission.formspreeEmail || submission.formspreePassword) && (
             <DetailGroup title="Accès techniques">
-              <CredentialsBlock
-                label="Cloudflare"
-                email={submission.cloudflareEmail}
-                password={submission.cloudflarePassword}
-              />
               <CredentialsBlock
                 label="Formspree"
                 email={submission.formspreeEmail}
@@ -815,7 +803,7 @@ function DetailRow({
               style={{
                 color: "var(--vb-accent-600)",
                 background: "var(--vb-accent-50)",
-                border: "1px solid rgba(78, 186, 236, 0.3)",
+                border: "1px solid rgba(255, 77, 157, 0.3)",
               }}
               title={linkLabel}
             >
@@ -976,7 +964,7 @@ function CopyBriefBtn({
           color: copied ? "var(--vb-accent-600)" : "var(--vb-text-muted)",
           background: copied ? "var(--vb-accent-50)" : "#fff",
           border: "1px solid",
-          borderColor: copied ? "rgba(78, 186, 236, 0.4)" : "var(--vb-border)",
+          borderColor: copied ? "rgba(255, 77, 157, 0.4)" : "var(--vb-border)",
         }}
         title={copied ? "Brief copié" : "Copier le brief complet"}
       >
@@ -1008,7 +996,7 @@ function submissionToPrompt(s: Submission): string {
   const headerName = s.entreprise || s.contactNom || "Sans nom";
   const lines: string[] = [];
 
-  lines.push(`# Brief client VBWEB — ${headerName}`);
+  lines.push(`# Brief client Ouibo — ${headerName}`);
   lines.push(`Reçu le ${date}`);
   lines.push("");
 
@@ -1084,12 +1072,11 @@ function submissionToPrompt(s: Submission): string {
     lines.push("");
   }
 
-  if (s.cloudflareEmail || s.formspreeEmail) {
+  if (s.formspreeEmail) {
     lines.push("## Accès techniques");
-    if (s.cloudflareEmail) lines.push(`- Email Cloudflare : ${s.cloudflareEmail}`);
-    if (s.formspreeEmail) lines.push(`- Email Formspree : ${s.formspreeEmail}`);
-    if (s.cloudflarePassword || s.formspreePassword) {
-      lines.push("(Mots de passe stockés dans l'admin, non inclus ici par sécurité.)");
+    lines.push(`- Email Formspree : ${s.formspreeEmail}`);
+    if (s.formspreePassword) {
+      lines.push("(Mot de passe stocké dans l'admin, non inclus ici par sécurité.)");
     }
     lines.push("");
   }

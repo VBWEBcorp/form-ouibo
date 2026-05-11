@@ -17,8 +17,6 @@ type FormState = {
   inspirations: string;
   fonctionnalites: string;
   motsCles: string;
-  cloudflareEmail: string;
-  cloudflarePassword: string;
   formspreeEmail: string;
   formspreePassword: string;
   notes: string;
@@ -38,14 +36,12 @@ const initial: FormState = {
   inspirations: "",
   fonctionnalites: "",
   motsCles: "",
-  cloudflareEmail: "",
-  cloudflarePassword: "",
   formspreeEmail: "",
   formspreePassword: "",
   notes: "",
 };
 
-const STORAGE_KEY = "vbweb-questionnaire-v3";
+const STORAGE_KEY = "ouibo-questionnaire-v3";
 
 function isValidEmail(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
@@ -76,8 +72,6 @@ export default function Page() {
       data.inspirations,
       data.fonctionnalites,
       data.motsCles,
-      data.cloudflareEmail,
-      data.cloudflarePassword,
       data.formspreeEmail,
       data.formspreePassword,
       data.notes,
@@ -171,13 +165,13 @@ export default function Page() {
       <main className="max-w-2xl mx-auto px-5 sm:px-8 py-20">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://i.ibb.co/5Wcyh7qd/VBWEB-LOGO-OFFICIEL.png"
-          alt="VBWEB"
-          className="h-10 w-auto mb-10"
+          src="https://i.ibb.co/Y408rXy2/Logo-OUIBO-removebg-preview.png"
+          alt="Ouibo"
+          className="h-12 w-auto mb-10"
         />
         <span
           className="block w-10 h-[3px] rounded-full mb-5"
-          style={{ background: "var(--vb-accent)" }}
+          style={{ background: "var(--vb-gradient)" }}
           aria-hidden
         />
         <h1
@@ -200,7 +194,7 @@ export default function Page() {
           </p>
         </div>
         <p className="mt-10 text-sm" style={{ color: "var(--vb-text-soft)" }}>
-          VBWEB
+          Ouibo
         </p>
       </main>
     );
@@ -215,34 +209,42 @@ export default function Page() {
       )}
       <main className="max-w-2xl lg:max-w-4xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
       <div className="vb-intro-card px-5 py-6 sm:p-10 mb-10 sm:mb-14">
-        {/* Letterhead : logo VBWEB flottant top-right */}
+        {/* Letterhead : logo OUIBO flottant top-right */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://i.ibb.co/5Wcyh7qd/VBWEB-LOGO-OFFICIEL.png"
-          alt="VBWEB"
+          src="https://i.ibb.co/Y408rXy2/Logo-OUIBO-removebg-preview.png"
+          alt="Ouibo"
           className="vb-letterhead-mark"
         />
 
-        {/* Bloc fondateur en tête de carte */}
+        {/* Bloc équipe en tête de carte */}
         <div className="flex items-center gap-3.5 sm:gap-4 mb-6 sm:mb-9 relative pr-12 sm:pr-24">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://i.ibb.co/ZpkH8MbS/image.webp"
-            alt="Victor, fondateur de VBWEB"
-            className="vb-signature-photo shrink-0"
-          />
+          <div className="vb-team-stack shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://i.ibb.co/B55PQmP0/Valentin.jpg"
+              alt="Valentin"
+              className="vb-signature-photo"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://i.ibb.co/23zMSVBF/Sarah.jpg"
+              alt="Sarah"
+              className="vb-signature-photo"
+            />
+          </div>
           <div className="min-w-0 leading-tight">
             <div
               className="text-base sm:text-lg font-semibold tracking-tight"
               style={{ color: "var(--vb-primary)" }}
             >
-              Victor
+              L&apos;équipe Ouibo
             </div>
             <div
               className="text-[13px] sm:text-sm mt-0.5"
               style={{ color: "var(--vb-text-muted)" }}
             >
-              Fondateur de VBWEB
+              À votre écoute pour votre projet web
             </div>
           </div>
         </div>
@@ -250,7 +252,7 @@ export default function Page() {
         {/* Trait d'accent + titre */}
         <span
           className="block w-10 sm:w-12 h-[3px] rounded-full mb-4 sm:mb-5 relative"
-          style={{ background: "var(--vb-accent)" }}
+          style={{ background: "var(--vb-gradient)" }}
           aria-hidden
         />
         <h1
@@ -281,9 +283,9 @@ export default function Page() {
             et avancerons avec ce que vous pourrez nous fournir.
           </p>
           <p>
-            Merci de nous transmettre ce questionnaire complété, en même temps que
-            votre contrat signé. La création de votre site débutera dès réception de
-            ces éléments et encaissement du premier paiement.
+            Merci de nous transmettre ce formulaire complété. Vos réponses nous
+            permettront de mieux cerner vos besoins et d&apos;avancer concrètement
+            sur votre projet.
           </p>
         </div>
 
@@ -467,52 +469,6 @@ export default function Page() {
           </Field>
         </Group>
 
-        <Group title="Configuration Cloudflare">
-          <p
-            className="text-sm leading-relaxed -mt-1"
-            style={{ color: "var(--vb-text-muted)" }}
-          >
-            Cloudflare nous permet de connecter votre nom de domaine à votre nouveau
-            site. Le service est gratuit.
-          </p>
-          <ol
-            className="text-sm leading-relaxed list-decimal pl-5 space-y-1"
-            style={{ color: "var(--vb-text-muted)" }}
-          >
-            <li>
-              Créez un compte sur{" "}
-              <a
-                href="https://dash.cloudflare.com/sign-up"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="vb-link"
-              >
-                cloudflare.com
-              </a>.
-            </li>
-            <li>Validez votre adresse email via le mail de confirmation reçu.</li>
-            <li>Indiquez ci-dessous les identifiants utilisés.</li>
-          </ol>
-          <Field label="Email du compte Cloudflare">
-            <Input
-              type="email"
-              value={data.cloudflareEmail}
-              onChange={(e) => update("cloudflareEmail", e.target.value)}
-              placeholder="vous@entreprise.fr"
-              autoComplete="off"
-            />
-          </Field>
-          <Field label="Mot de passe Cloudflare">
-            <Input
-              type="password"
-              value={data.cloudflarePassword}
-              onChange={(e) => update("cloudflarePassword", e.target.value)}
-              placeholder="••••••••"
-              autoComplete="off"
-            />
-          </Field>
-        </Group>
-
         <Group title="Configuration Formspree">
           <p
             className="text-sm leading-relaxed -mt-1"
@@ -612,7 +568,7 @@ function Group({
           className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full shrink-0"
           style={{
             background: "var(--vb-accent)",
-            boxShadow: "0 0 0 4px rgba(78, 186, 236, 0.16)",
+            boxShadow: "0 0 0 4px rgba(255, 77, 157, 0.16)",
           }}
           aria-hidden
         />

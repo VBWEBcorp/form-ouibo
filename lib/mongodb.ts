@@ -19,6 +19,6 @@ function getMongoClient(): Promise<MongoClient> {
 
 export async function getQuestionnaireCollection() {
   const client = await getMongoClient();
-  const db = client.db(process.env.MONGODB_DB || "VBWEB");
+  const db = client.db(process.env.MONGODB_DB || "OUIBO");
   return db.collection(process.env.MONGODB_COLLECTION || "questionnaires");
 }

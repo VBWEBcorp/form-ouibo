@@ -44,13 +44,13 @@ export function AdminLogin() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://i.ibb.co/5Wcyh7qd/VBWEB-LOGO-OFFICIEL.png"
-          alt="VBWEB"
-          className="h-9 w-auto mb-7"
+          src="https://i.ibb.co/Y408rXy2/Logo-OUIBO-removebg-preview.png"
+          alt="Ouibo"
+          className="h-10 w-auto mb-7"
         />
         <span
           className="block w-8 h-[3px] rounded-full mb-4"
-          style={{ background: "var(--vb-accent)" }}
+          style={{ background: "var(--vb-gradient)" }}
           aria-hidden
         />
         <h1

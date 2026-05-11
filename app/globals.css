@@ -1,19 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --vb-primary: #1a2c45;
-  --vb-accent: #4ebaec;
-  --vb-accent-600: #2aa3da;
-  --vb-accent-50: #eaf6fd;
+  /* Palette OUIBO — texte sombre + accent rose→violet */
+  --vb-primary: #1f1933;
+  --vb-accent: #ff4d9d;        /* rose principal */
+  --vb-accent-600: #d63384;    /* rose foncé (hover/lien) */
+  --vb-accent-50: #fde9f2;     /* rose très clair (fond) */
+  --vb-accent-purple: #a855f7; /* violet (fin de dégradé) */
 
-  --vb-text: #1a2c45;
-  --vb-text-muted: #5a6a82;
-  --vb-text-soft: #8a96ab;
-  --vb-border: #e2e8f0;
-  --vb-border-strong: #cbd5e1;
+  --vb-text: #1f1933;
+  --vb-text-muted: #5a526b;
+  --vb-text-soft: #8a85a0;
+  --vb-border: #ece6f0;
+  --vb-border-strong: #d6cee0;
 
   --vb-danger: #e11d48;
   --vb-danger-soft: #fff1f3;
+
+  /* Dégradé signature OUIBO */
+  --vb-gradient: linear-gradient(90deg, #ff4d9d 0%, #a855f7 100%);
 }
 
 @theme inline {
@@ -53,13 +58,13 @@ textarea {
 }
 
 ::selection {
-  background: rgba(78, 186, 236, 0.28);
+  background: rgba(255, 77, 157, 0.28);
   color: var(--vb-primary);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #9aa6bd;
+  color: #aaa3b8;
 }
 
 .vb-input {
@@ -82,7 +87,7 @@ textarea::placeholder {
 }
 .vb-input:focus {
   border-color: var(--vb-accent);
-  box-shadow: 0 0 0 3px rgba(78, 186, 236, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 77, 157, 0.2);
 }
 
 .vb-choice {
@@ -97,7 +102,7 @@ textarea::placeholder {
 .vb-choice[data-active="true"] {
   border-color: var(--vb-accent);
   background: var(--vb-accent-50);
-  box-shadow: 0 0 0 3px rgba(78, 186, 236, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 77, 157, 0.2);
 }
 
 .vb-field-wrap[data-missing="true"] .vb-input,
@@ -109,12 +114,14 @@ textarea::placeholder {
 }
 
 .vb-btn-submit {
-  background: var(--vb-primary);
+  background: var(--vb-gradient);
   color: #ffffff;
-  transition: background 0.15s ease, transform 0.12s ease;
+  transition: filter 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+  box-shadow: 0 8px 24px -10px rgba(255, 77, 157, 0.55);
 }
 .vb-btn-submit:hover:not(:disabled) {
-  background: #0f1f33;
+  filter: brightness(1.05);
+  box-shadow: 0 10px 28px -10px rgba(168, 85, 247, 0.55);
 }
 .vb-btn-submit:active:not(:disabled) {
   transform: translateY(1px);
@@ -130,7 +137,7 @@ textarea::placeholder {
   text-underline-offset: 2px;
 }
 .vb-link:hover {
-  color: var(--vb-primary);
+  color: var(--vb-accent-purple);
 }
 
 html {
@@ -145,17 +152,13 @@ html {
   right: 0;
   height: 3px;
   z-index: 60;
-  background: rgba(26, 44, 69, 0.05);
+  background: rgba(31, 25, 51, 0.05);
   pointer-events: none;
 }
 .vb-form-progress-bar {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--vb-primary) 0%,
-    var(--vb-accent) 100%
-  );
-  box-shadow: 0 0 8px rgba(78, 186, 236, 0.35);
+  background: var(--vb-gradient);
+  box-shadow: 0 0 8px rgba(255, 77, 157, 0.35);
   transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -173,21 +176,21 @@ html {
   background:
     radial-gradient(
       1100px 380px at 110% -20%,
-      rgba(78, 186, 236, 0.14) 0%,
-      rgba(78, 186, 236, 0) 60%
+      rgba(255, 77, 157, 0.12) 0%,
+      rgba(255, 77, 157, 0) 60%
     ),
     radial-gradient(
       600px 400px at -10% 120%,
-      rgba(26, 44, 69, 0.05) 0%,
-      rgba(26, 44, 69, 0) 60%
+      rgba(168, 85, 247, 0.08) 0%,
+      rgba(168, 85, 247, 0) 60%
     ),
     #ffffff;
   border: 1px solid var(--vb-border);
   border-radius: 1.75rem;
   box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 28px 70px -32px rgba(26, 44, 69, 0.22),
-    0 10px 28px -16px rgba(78, 186, 236, 0.18);
+    0 1px 2px rgba(31, 25, 51, 0.04),
+    0 28px 70px -32px rgba(168, 85, 247, 0.25),
+    0 10px 28px -16px rgba(255, 77, 157, 0.2);
   overflow: hidden;
 }
 .vb-intro-card::before {
@@ -197,12 +200,7 @@ html {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    var(--vb-primary) 0%,
-    var(--vb-accent) 50%,
-    var(--vb-primary) 100%
-  );
+  background: var(--vb-gradient);
   opacity: 0.95;
   z-index: 1;
 }
@@ -216,7 +214,7 @@ html {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(78, 186, 236, 0.4),
+    rgba(255, 77, 157, 0.4),
     transparent
   );
   pointer-events: none;
@@ -237,7 +235,7 @@ html {
   }
 }
 
-/* Founder photo inside intro card */
+/* Team photos inside intro card */
 .vb-signature-photo {
   width: 54px;
   height: 54px;
@@ -246,8 +244,8 @@ html {
   background: var(--vb-accent-50);
   border: 2px solid #ffffff;
   box-shadow:
-    0 0 0 2px rgba(78, 186, 236, 0.5),
-    0 6px 18px -8px rgba(26, 44, 69, 0.28);
+    0 0 0 2px rgba(255, 77, 157, 0.5),
+    0 6px 18px -8px rgba(168, 85, 247, 0.3);
 }
 @media (min-width: 640px) {
   .vb-signature-photo {
@@ -257,22 +255,36 @@ html {
   }
 }
 
+/* Stack des deux photos d'équipe côte à côte */
+.vb-team-stack {
+  display: flex;
+  align-items: center;
+}
+.vb-team-stack .vb-signature-photo + .vb-signature-photo {
+  margin-left: -14px;
+}
+@media (min-width: 640px) {
+  .vb-team-stack .vb-signature-photo + .vb-signature-photo {
+    margin-left: -18px;
+  }
+}
+
 /* Floating brand mark in intro card top-right */
 .vb-letterhead-mark {
   position: absolute;
   top: 1.1rem;
   right: 1.25rem;
-  height: 1.125rem;
+  height: 1.5rem;
   width: auto;
-  opacity: 0.8;
+  opacity: 0.85;
   pointer-events: none;
 }
 @media (min-width: 640px) {
   .vb-letterhead-mark {
     top: 1.75rem;
     right: 1.75rem;
-    height: 1.625rem;
-    opacity: 0.85;
+    height: 2rem;
+    opacity: 0.9;
   }
 }
 
@@ -294,8 +306,8 @@ html {
 
 /* Subtle pulse on the "new" pill */
 @keyframes vb-pulse-soft {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(78, 186, 236, 0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(78, 186, 236, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 77, 157, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 77, 157, 0); }
 }
 .vb-pulse-pill {
   animation: vb-pulse-soft 1.6s ease-in-out infinite;

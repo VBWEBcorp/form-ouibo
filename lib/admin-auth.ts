@@ -1,10 +1,10 @@
 import { cookies } from "next/headers";
 import { createHash } from "crypto";
 
-export const ADMIN_COOKIE = "vbweb-admin";
+export const ADMIN_COOKIE = "ouibo-admin";
 
 export function adminToken(password: string): string {
-  return createHash("sha256").update(`vbweb-admin:${password}`).digest("hex");
+  return createHash("sha256").update(`ouibo-admin:${password}`).digest("hex");
 }
 
 export async function isAdminAuthenticated(): Promise<boolean> {
