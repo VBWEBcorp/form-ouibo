@@ -35,9 +35,6 @@ export default async function AdminPage() {
     inspirations: typeof d.inspirations === "string" ? d.inspirations : "",
     fonctionnalites: typeof d.fonctionnalites === "string" ? d.fonctionnalites : "",
     motsCles: typeof d.motsCles === "string" ? d.motsCles : "",
-    cloudflareEmail: typeof d.cloudflareEmail === "string" ? d.cloudflareEmail : "",
-    cloudflarePassword:
-      typeof d.cloudflarePassword === "string" ? d.cloudflarePassword : "",
     formspreeEmail: typeof d.formspreeEmail === "string" ? d.formspreeEmail : "",
     formspreePassword:
       typeof d.formspreePassword === "string" ? d.formspreePassword : "",
