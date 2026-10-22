@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r \"c:/Users/conta/OneDrive/Desktop/Cursor/form-ouibo-tmp/.\" \"c:/Users/conta/OneDrive/Desktop/Cursor/form-ouibo/\")",
+      "Bash(cp -r \"c:/Users/conta/OneDrive/Desktop/Cursor/form-ouibo-tmp/.git\" \"c:/Users/conta/OneDrive/Desktop/Cursor/form-ouibo/\")",
+      "Bash(rm -rf \"c:/Users/conta/OneDrive/Desktop/Cursor/form-ouibo-tmp\")",
+      "Bash(rm -rf \"c:/Users/conta/OneDrive/Desktop/Cursor/form-ouibo-tmp\" 2>&1; cat \"c:/Users/conta/OneDrive/Desktop/Cursor/form-ouibo/package.json\")",
+      "Bash(netlify sites:list --json)",
+      "Bash(netlify link *)",
+      "Bash(netlify api *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\conta\\OneDrive\\Desktop\\Cursor\\form-ouibo-tmp"
+    ]
+  }
+}
